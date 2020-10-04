@@ -14,6 +14,9 @@ class Player(pygame.sprite.Sprite):
         superficie.blit(self.imagen, self.rect)
 
 
+#def nivel2():
+
+
 def main():
     pygame.init()
     pantalla = pygame.display.set_mode([800, 800])
@@ -25,19 +28,23 @@ def main():
     vy = 0
     velocidad = 10
     contador = 0
-    fuente1=pygame.font.SysFont("Arial",20,True,False)
-    renglon1=fuente1.render("LA CIUDAD FUE INVADIDA",0,(255, 255, 255))
-    renglon2=fuente1.render("POR ZOMBIES",0,(255, 255, 255))
-    renglon3=fuente1.render("Y SOLO TÚ",0,(255, 255, 255))
-    renglon4=fuente1.render("PUEDES ESCAPAR",0,(255, 255, 255))
-
-    reloj1 = pygame.time.Clock()
+    controlador = 0
 
     # colores
     blanco = (255, 255, 255)
     celeste = (100, 210, 230)
     verde = (76, 145, 65)
     negro = (0, 0, 0)
+
+    #textos del
+    fuente1=pygame.font.SysFont("Arial",36,True,False)
+    cargando=fuente1.render("CARGANDO",0,blanco)
+    renglon1=fuente1.render("LA CIUDAD FUE INVADIDA",0,blanco)
+    renglon2=fuente1.render("POR ZOMBIES",0,blanco)
+    renglon3=fuente1.render("Y SOLO TÚ",0,blanco)
+    renglon4=fuente1.render("PUEDES ESCAPAR",0,blanco)
+
+    reloj1 = pygame.time.Clock()
 
     # marco de pantalla
     rizq = pygame.Rect(-1, -1, 1, 801)
@@ -102,21 +109,23 @@ def main():
                 if event.key == pygame.K_LEFT:
                     vx = 0
 
-        while contador<7000:
-            pantalla.fill(negro)
-            pantalla.blit(renglon1, (0, 0))
-            pantalla.blit(renglon2, (0, 30))
-            contador=pygame.time.get_ticks()
-            pygame.display.update()
-
-        while contador<10000:
-            pantalla.fill(negro)
-            pantalla.blit(renglon3, (0, 0))
-            pantalla.blit(renglon4, (0, 30))
-            contador=pygame.time.get_ticks()
-            pygame.display.update()
-
         reloj1.tick(20)
+
+        if controlador ==1:
+            while contador<7000:
+                pantalla.fill(negro)
+                pantalla.blit(cargando, (700, 10))
+                contador=pygame.time.get_ticks()
+                pygame.display.update()
+
+            while contador<10000:
+                pantalla.fill(negro)
+                pantalla.blit(renglon1, (0, 0))
+                pantalla.blit(renglon2, (0, 30))
+                contador=pygame.time.get_ticks()
+                pygame.display.update()
+        controlador=controlador+1
+
         pantalla.fill(verde)
 
         for i in range(0, len(listrect)):
