@@ -1,5 +1,6 @@
 import pygame
 
+negro = (0, 0, 0)
 
 class Ventana:
     def __init__(self):
@@ -47,3 +48,18 @@ class Ventana:
         if not llave:
             pantalla.blit(key, self.key)
         pantalla.blit(casa, self.rLlegada)
+
+    def pausa(self, pantalla):
+        pausa = True
+        iPausa = pygame.image.load("Pausa.png")
+        pantalla.blit(iPausa, self.lstcamino[0])
+        pygame.display.update()
+        salir = False
+        while pausa and not salir:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    salir = True
+                if event.type == pygame.KEYUP:
+                    if event.key == pygame.K_SPACE:
+                        pausa = False
+        return salir

@@ -35,10 +35,13 @@ def main(cont_nivel):
 
         (xant, yant) = (jugador.rect.left, jugador.rect.top)
 
-        #  Evento de salida
+        #  Evento de salida/pausa
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 salir = True
+            if event.type == pygame.KEYUP:
+                if event.key == pygame.K_SPACE:
+                     salir = ven.pausa(pantalla)
 
         jugador.handle_event(event)
         pantalla.blit(jugador.image, jugador.rect)
@@ -57,7 +60,7 @@ def main(cont_nivel):
             llave = True
 
         pygame.display.update()
-        clock.tick(20)
+        clock.tick(40)
 
     # Al finalizar el bucle, se evalua si continuar al siguiente nivel o no
     if cont_nivel < 2 and not salir:
